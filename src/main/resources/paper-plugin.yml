@@ -1,9 +1,13 @@
 name: '${name}'
 main: '${group}.${name}'
 
-authors: ${authors}
-
 version: '${version}'
 api-version: '${apiVersion}'
 description: '${description}'
-website: '${website}'
+
+dependencies:
+  server:
+    WorldGuard:
+      load: AFTER
+      required: true
+      join-classpath: true
