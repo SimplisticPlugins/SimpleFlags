@@ -120,7 +120,7 @@ tasks {
         outputJar.set(file("$jarsDir/${rootProject.name}-${rootProject.version}.jar"))
     }
 
-    val directory = File("$rootDir/jars/${project.name.lowercase()}")
+    val directory = File("$rootDir/jars")
 
     val isBeta: Boolean = providers.gradleProperty("isBeta").get().toBoolean()
     val type = if (isBeta) "Beta" else "Release"
