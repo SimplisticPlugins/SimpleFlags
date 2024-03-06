@@ -172,6 +172,8 @@ world-settings:
     item-despawn-rate: 6000
     nerf-spawner-mobs: false
     verbose: false
+  worldeditregentempworld:
+    verbose: false
 config-version: 12
 stats:
   disable-saving: false
