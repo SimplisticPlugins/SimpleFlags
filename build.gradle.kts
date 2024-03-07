@@ -96,7 +96,7 @@ tasks {
 
     assemble {
         doFirst {
-            jarsDir.delete()
+            delete(jarsDir)
 
             jarsDir.mkdirs()
         }
