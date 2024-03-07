@@ -19,11 +19,19 @@ project.version = if (System.getenv("BUILD_NUMBER") != null) "${rootProject.vers
 repositories {
     maven("https://repo.papermc.io/repository/maven-public/")
 
+    maven("https://repo.triumphteam.dev/snapshots/")
+
     maven("https://maven.enginehub.org/repo/")
 }
 
 dependencies {
+    implementation(libs.metrics)
+
+    compileOnly(libs.triumphcmds)
+
     compileOnly(libs.worldguard)
+
+    compileOnly(libs.configme)
 
     paperweight.paperDevBundle("$mcVersion-R0.1-SNAPSHOT")
 }
@@ -97,16 +105,13 @@ tasks {
         dependsOn(reobfJar)
     }
 
-    // This will relocate any dependencies that need to be relocated.
-    // Uncomment this if you need to use it.
-    /*shadowJar {
+    shadowJar {
         listOf(
-            // A common usage is to relocate bstats.
             "org.bstats"
         ).forEach {
             relocate(it, "libs.$it")
         }
-    }*/
+    }
 
     runServer {
         jvmArgs("-Dnet.kyori.ansi.colorLevel=truecolor")
