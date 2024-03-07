@@ -12,7 +12,7 @@ public class Locale implements SettingsHolder {
 
     public static final Property<String> reload_plugin = newProperty("root.reload-plugin", "{prefix}<red>You have reloaded the plugin.");
 
-    public static final Property<List<String>> help = newListProperty("root.help", List.of(
+    public static final Property<List<String>> help = newListProperty("root.help-menu", List.of(
             "<red>SimpleFlags Help Menu",
             "",
             " <red>/simpleflags reload <gray>- <gold>Reloads the plugin."
