@@ -12,6 +12,10 @@ plugins {
     `java-library`
 }
 
+base {
+    archivesName.set(rootProject.name)
+}
+
 val mcVersion = providers.gradleProperty("mcVersion").get()
 
 project.version = if (System.getenv("BUILD_NUMBER") != null) "${rootProject.version}-${System.getenv("BUILD_NUMBER")}" else rootProject.version
@@ -41,7 +45,7 @@ java {
 }
 
 // The commit id for the "main" branch prior to merging a pull request.
-val start = "370c37"
+val start = "d7f655"
 
 // The commit id BEFORE merging the pull request so before "Merge pull request #30"
 val end = "5d42ed"
@@ -103,6 +107,13 @@ tasks {
 
         // Makes it so reobfJar runs next.
         dependsOn(reobfJar)
+
+        doLast {
+            copy {
+                from(project.layout.buildDirectory.file("libs/${rootProject.name}-${project.version}.jar"))
+                into(jarsDir)
+            }
+        }
     }
 
     shadowJar {
@@ -120,12 +131,6 @@ tasks {
 
         minecraftVersion(mcVersion)
     }
-
-    reobfJar {
-        outputJar.set(file("$jarsDir/${rootProject.name}-${rootProject.version}.jar"))
-    }
-
-    val directory = File("$rootDir/jars")
 
     val isBeta: Boolean = providers.gradleProperty("isBeta").get().toBoolean()
     val type = if (isBeta) "Beta" else "Release"
@@ -145,7 +150,7 @@ tasks {
 
         versionNumber.set("${project.version}")
 
-        uploadFile.set("$directory/${rootProject.name}-${project.version}.jar")
+        uploadFile.set("$jarsDir/${rootProject.name}-${project.version}.jar")
 
         gameVersions.add(mcVersion)
 
