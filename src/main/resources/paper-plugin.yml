@@ -5,6 +5,8 @@ version: '${version}'
 api-version: '${apiVersion}'
 description: '${description}'
 
+loader: '${group}.SimpleStrap'
+
 dependencies:
   server:
     WorldGuard:
