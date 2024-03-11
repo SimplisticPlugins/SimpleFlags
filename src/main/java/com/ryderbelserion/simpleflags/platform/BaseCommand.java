@@ -9,6 +9,7 @@ import dev.triumphteam.cmd.bukkit.annotation.Permission;
 import dev.triumphteam.cmd.core.annotations.Command;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
+import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,13 +32,13 @@ public class BaseCommand {
     private final MiniMessage message = MiniMessage.miniMessage();
 
     @Command
-    @Permission("simpleflags.help")
+    @Permission(value = "simpleflags.help", def = PermissionDefault.TRUE)
     public void help(CommandSender sender) {
         this.locale.getProperty(Locale.help).forEach(line -> sender.sendMessage(this.message.deserialize(line)));
     }
 
     @Command("reload")
-    @Permission("simpleflags.reload")
+    @Permission(value = "simpleflags.reload", def = PermissionDefault.OP)
     public void reload(CommandSender sender) {
         // Reload the config files.
         this.config.reload();
