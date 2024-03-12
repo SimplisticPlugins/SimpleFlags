@@ -11,6 +11,7 @@ import com.sk89q.worldguard.protection.regions.RegionQuery;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public abstract class FlagBuilder {
@@ -41,6 +42,22 @@ public abstract class FlagBuilder {
         Location location = BukkitAdapter.adapt(player.getLocation());
 
         return getQuery().testState(location, localPlayer, getFlag());
+    }
+
+    /**
+     * Prevent spawning based on a supplied spawn reason.
+     *
+     * @param location the location to check.
+     * @param receivingReason the reason from the event.
+     * @param reason your reason.
+     * @return true or false
+     */
+    public boolean preventSpawning(org.bukkit.Location location, CreatureSpawnEvent.SpawnReason receivingReason, CreatureSpawnEvent.SpawnReason reason) {
+        if (receivingReason != reason) {
+            return false;
+        }
+
+        return getQuery().testState(BukkitAdapter.adapt(location), null, getFlag());
     }
 
     /**

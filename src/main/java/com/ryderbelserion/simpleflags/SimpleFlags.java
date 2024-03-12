@@ -5,7 +5,9 @@ import ch.jalu.configme.SettingsManagerBuilder;
 import ch.jalu.configme.resource.YamlFileResourceOptions;
 import com.ryderbelserion.simpleflags.flags.FlagManager;
 import com.ryderbelserion.simpleflags.flags.types.DrownFlag;
+import com.ryderbelserion.simpleflags.flags.types.NaturalFlag;
 import com.ryderbelserion.simpleflags.listeners.DrowningListener;
+import com.ryderbelserion.simpleflags.listeners.NaturalListener;
 import com.ryderbelserion.simpleflags.platform.BaseCommand;
 import com.ryderbelserion.simpleflags.platform.impl.Config;
 import com.ryderbelserion.simpleflags.platform.impl.Locale;
@@ -36,7 +38,8 @@ public class SimpleFlags extends JavaPlugin {
         this.flagManager = new FlagManager();
 
         List.of(
-                new DrownFlag()
+                new DrownFlag(),
+                new NaturalFlag()
         ).forEach(this.flagManager::addFlag);
     }
 
@@ -64,6 +67,7 @@ public class SimpleFlags extends JavaPlugin {
 
         // Register the listener.
         getServer().getPluginManager().registerEvents(new DrowningListener(), this);
+        getServer().getPluginManager().registerEvents(new NaturalListener(), this);
 
         // Register the commands.
         BukkitCommandManager<CommandSender> command = BukkitCommandManager.create(this);
