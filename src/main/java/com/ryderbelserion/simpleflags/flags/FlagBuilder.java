@@ -33,15 +33,7 @@ public abstract class FlagBuilder {
      * @return true or false
      */
     public boolean preventDamage(Player player, DamageSource source, DamageType type) {
-        if (source.getDamageType() != type) {
-            return false;
-        }
-
-        LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
-
-        Location location = BukkitAdapter.adapt(player.getLocation());
-
-        return getQuery().testState(location, localPlayer, getFlag());
+        return source.getDamageType() == type && getQuery().testState(BukkitAdapter.adapt(player.getLocation()),  WorldGuardPlugin.inst().wrapPlayer(player), getFlag());
     }
 
     /**
