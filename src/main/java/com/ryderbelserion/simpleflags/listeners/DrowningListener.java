@@ -4,6 +4,7 @@ import com.ryderbelserion.simpleflags.SimpleFlags;
 import com.ryderbelserion.simpleflags.flags.FlagBuilder;
 import com.ryderbelserion.simpleflags.flags.FlagManager;
 import com.ryderbelserion.simpleflags.flags.enums.CustomFlags;
+import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,7 +18,7 @@ public class DrowningListener implements Listener {
 
     private final FlagManager flagManager = this.plugin.getFlagManager();
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onPlayerDrowning(EntityDamageEvent event) {
         Entity entity = event.getEntity();
 
@@ -25,7 +26,7 @@ public class DrowningListener implements Listener {
 
         FlagBuilder flag = this.flagManager.getFlag(CustomFlags.DROWN_FLAG.getName());
 
-        if (!flag.checkFlag(player, event.getDamageSource())) {
+        if (!flag.preventDamage(player, event.getDamageSource(), DamageType.DROWN)) {
             event.setCancelled(true);
         }
     }
