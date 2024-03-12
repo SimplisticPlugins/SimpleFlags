@@ -45,11 +45,7 @@ public abstract class FlagBuilder {
      * @return true or false
      */
     public boolean preventSpawning(org.bukkit.Location location, CreatureSpawnEvent.SpawnReason receivingReason, CreatureSpawnEvent.SpawnReason reason) {
-        if (receivingReason != reason) {
-            return false;
-        }
-
-        return getQuery().testState(BukkitAdapter.adapt(location), null, getFlag());
+        return receivingReason != reason || getQuery().testState(BukkitAdapter.adapt(location), null, getFlag());
     }
 
     /**
