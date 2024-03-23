@@ -15,6 +15,7 @@ public class Locale implements SettingsHolder {
     public static final Property<List<String>> help = newListProperty("root.help-menu", List.of(
             "<red>SimpleFlags Help Menu",
             "",
+            " <red>/simpleflags <gray>- <gold>Shows this menu.",
             " <red>/simpleflags reload <gray>- <gold>Reloads the plugin."
     ));
 }
