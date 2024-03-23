@@ -33,7 +33,7 @@ public class BaseCommand {
     @Command
     @Permission(value = "simpleflags.help", def = PermissionDefault.TRUE)
     public void help(CommandSender sender) {
-        this.locale.getProperty(Locale.help).forEach(line -> sender.sendMessage(this.message.deserialize(line)));
+        this.locale.getProperty(Locale.help).forEach(sender::sendRichMessage);
     }
 
     @Command("reload")
@@ -44,8 +44,5 @@ public class BaseCommand {
         this.locale.reload();
 
         sender.sendRichMessage(this.locale.getProperty(Locale.reload_plugin).replaceAll("\\{prefix}", this.config.getProperty(Config.command_prefix)));
-
-        // Send the reload message.
-        sender.sendMessage(this.message.deserialize(this.locale.getProperty(Locale.reload_plugin).replaceAll("\\{prefix}", this.config.getProperty(Config.command_prefix))));
     }
 }
