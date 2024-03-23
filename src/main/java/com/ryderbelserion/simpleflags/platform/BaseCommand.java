@@ -12,6 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 @Command("simpleflags")
+@Permission("simpleflags.access")
 public class BaseCommand {
 
     private final @NotNull SimpleFlags plugin = JavaPlugin.getPlugin(SimpleFlags.class);
