@@ -70,9 +70,6 @@ public class SimpleFlags extends JavaPlugin {
     @Override
     public void onDisable() {
         super.onDisable();
-        if (this.config != null) this.config.save();
-
-        if (this.locale != null) this.locale.save();
     }
 
     public SettingsManager getOptions() {
