@@ -29,13 +29,11 @@ repositories {
 dependencies {
     paperweight.paperDevBundle(libs.versions.bundle)
 
-    compileOnly(libs.triumphcmds)
+    compileOnly(libs.triumph.cmds)
 
     compileOnly(libs.worldguard)
 
     compileOnly(libs.configme)
-
-    paperweight.paperDevBundle("$mcVersion-R0.1-SNAPSHOT")
 }
 
 java {
