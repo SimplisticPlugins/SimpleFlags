@@ -19,8 +19,7 @@ public class BaseCommand {
     @NotNull
     private final SimpleFlags plugin = JavaPlugin.getPlugin(SimpleFlags.class);
 
-    @NotNull
-    private final Metrics metrics = this.plugin.getMetrics();
+    private final @NotNull SettingsManager config = this.plugin.getOptions();
 
     @NotNull
     private final SettingsManager config = this.plugin.getOptions();
@@ -44,12 +43,7 @@ public class BaseCommand {
         this.config.reload();
         this.locale.reload();
 
-        // Check if metrics needs to be enabled or not.
-        if (!this.config.getProperty(Config.toggle_metrics)) {
-            this.metrics.stop();
-        } else {
-            this.metrics.start();
-        }
+        sender.sendRichMessage(this.locale.getProperty(Locale.reload_plugin).replaceAll("\\{prefix}", this.config.getProperty(Config.command_prefix)));
 
         // Send the reload message.
         sender.sendMessage(this.message.deserialize(this.locale.getProperty(Locale.reload_plugin).replaceAll("\\{prefix}", this.config.getProperty(Config.command_prefix))));

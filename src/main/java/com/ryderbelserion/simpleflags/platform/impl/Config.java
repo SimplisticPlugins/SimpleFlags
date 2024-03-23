@@ -7,9 +7,6 @@ import static ch.jalu.configme.properties.PropertyInitializer.newProperty;
 
 public class Config implements SettingsHolder {
 
-    @Comment("Sends anonymous statistics about how the plugin is used to bStats.org")
-    public static final Property<Boolean> toggle_metrics = newProperty("root.toggle_metrics", true);
-
     @Comment("The prefix that appears in front of messages.")
     public static final Property<String> command_prefix = newProperty("root.prefix", "<gold>[<red>SimpleFlags<gold>]: ");
 }

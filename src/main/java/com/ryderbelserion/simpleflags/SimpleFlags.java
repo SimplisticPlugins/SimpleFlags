@@ -11,7 +11,6 @@ import com.ryderbelserion.simpleflags.listeners.NaturalListener;
 import com.ryderbelserion.simpleflags.platform.BaseCommand;
 import com.ryderbelserion.simpleflags.platform.impl.Config;
 import com.ryderbelserion.simpleflags.platform.impl.Locale;
-import com.ryderbelserion.simpleflags.platform.impl.Metrics;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import dev.triumphteam.cmd.bukkit.BukkitCommandManager;
@@ -28,8 +27,6 @@ public class SimpleFlags extends JavaPlugin {
     private WorldGuard worldGuard;
 
     private FlagManager flagManager;
-
-    private Metrics metrics;
 
     @Override
     public void onLoad() {
@@ -54,11 +51,6 @@ public class SimpleFlags extends JavaPlugin {
                 .configurationData(Config.class)
                 .create();
 
-        if (this.config.getProperty(Config.toggle_metrics)) {
-            this.metrics = new Metrics();
-            this.metrics.start();
-        }
-
         this.locale = SettingsManagerBuilder
                 .withYamlFile(new File(getDataFolder(), "messages.yml"), builder)
                 .useDefaultMigrationService()
@@ -77,8 +69,7 @@ public class SimpleFlags extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        if (this.metrics != null) this.metrics.stop();
-
+        super.onDisable();
         if (this.config != null) this.config.save();
 
         if (this.locale != null) this.locale.save();
@@ -88,10 +79,7 @@ public class SimpleFlags extends JavaPlugin {
         return this.config;
     }
 
-    public Metrics getMetrics() {
-        return this.metrics;
-    }
-
+    public @NotNull SettingsManager getLocale() {
     public SettingsManager getLocale() {
         return this.locale;
     }

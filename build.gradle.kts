@@ -27,7 +27,7 @@ repositories {
 }
 
 dependencies {
-    implementation(libs.metrics)
+    paperweight.paperDevBundle(libs.versions.bundle)
 
     compileOnly(libs.triumphcmds)
 
@@ -73,14 +73,6 @@ tasks {
                 from(project.layout.buildDirectory.file("libs/${rootProject.name}-${project.version}.jar"))
                 into(jarsDir)
             }
-        }
-    }
-
-    shadowJar {
-        listOf(
-            "org.bstats"
-        ).forEach {
-            relocate(it, "libs.$it")
         }
     }
 
