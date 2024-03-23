@@ -5,7 +5,7 @@ version: '${version}'
 api-version: '${apiVersion}'
 description: '${description}'
 
-loader: '${group}.SimpleStrap'
+loader: '${group}.LibraryLoader'
 
 dependencies:
   server:
