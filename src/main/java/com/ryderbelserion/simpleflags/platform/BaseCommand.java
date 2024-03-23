@@ -4,10 +4,8 @@ import ch.jalu.configme.SettingsManager;
 import com.ryderbelserion.simpleflags.SimpleFlags;
 import com.ryderbelserion.simpleflags.platform.impl.Config;
 import com.ryderbelserion.simpleflags.platform.impl.Locale;
-import com.ryderbelserion.simpleflags.platform.impl.Metrics;
 import dev.triumphteam.cmd.bukkit.annotation.Permission;
 import dev.triumphteam.cmd.core.annotations.Command;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,19 +14,11 @@ import org.jetbrains.annotations.NotNull;
 @Command("simpleflags")
 public class BaseCommand {
 
-    @NotNull
-    private final SimpleFlags plugin = JavaPlugin.getPlugin(SimpleFlags.class);
+    private final @NotNull SimpleFlags plugin = JavaPlugin.getPlugin(SimpleFlags.class);
 
     private final @NotNull SettingsManager config = this.plugin.getOptions();
 
-    @NotNull
-    private final SettingsManager config = this.plugin.getOptions();
-
-    @NotNull
-    private final SettingsManager locale = this.plugin.getLocale();
-
-    @NotNull
-    private final MiniMessage message = MiniMessage.miniMessage();
+    private final @NotNull SettingsManager locale = this.plugin.getLocale();
 
     @Command
     @Permission(value = "simpleflags.help", def = PermissionDefault.TRUE)

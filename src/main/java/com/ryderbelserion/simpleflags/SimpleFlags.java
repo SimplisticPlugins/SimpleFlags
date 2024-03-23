@@ -16,6 +16,7 @@ import com.sk89q.worldguard.protection.regions.RegionContainer;
 import dev.triumphteam.cmd.bukkit.BukkitCommandManager;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.util.List;
 
@@ -72,24 +73,23 @@ public class SimpleFlags extends JavaPlugin {
         super.onDisable();
     }
 
-    public SettingsManager getOptions() {
+    public @NotNull SettingsManager getOptions() {
         return this.config;
     }
 
     public @NotNull SettingsManager getLocale() {
-    public SettingsManager getLocale() {
         return this.locale;
     }
 
-    public WorldGuard getWorldGuard() {
+    public @NotNull WorldGuard getWorldGuard() {
         return this.worldGuard;
     }
 
-    public RegionContainer getRegions() {
+    public @NotNull RegionContainer getRegions() {
         return this.worldGuard.getPlatform().getRegionContainer();
     }
 
-    public FlagManager getFlagManager() {
+    public @NotNull FlagManager getFlagManager() {
         return this.flagManager;
     }
 }
