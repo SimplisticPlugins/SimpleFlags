@@ -1,11 +1,8 @@
 plugins {
-    id("com.github.johnrengelman.shadow") version "8.1.1"
-
-    id("io.papermc.paperweight.userdev") version "1.5.9"
-
-    id("xyz.jpenilla.run-paper") version "2.2.3"
-
-    id("com.modrinth.minotaur") version "2.8.7"
+    alias(libs.plugins.shadow)
+    alias(libs.plugins.userdev)
+    alias(libs.plugins.run.paper)
+    alias(libs.plugins.modrinth)
 
     `java-library`
 }
