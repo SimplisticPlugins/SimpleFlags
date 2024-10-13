@@ -16,6 +16,11 @@ public class FlagManager {
         this.flags.putIfAbsent(builder.getName(), builder);
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    public boolean hasFlag(String name) {
+        return this.flags.containsKey(name);
+    }
+
     public FlagBuilder getFlag(String name) {
         return this.flags.get(name);
     }
