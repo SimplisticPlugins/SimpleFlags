@@ -62,10 +62,17 @@ public class SimpleFlags extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new DrowningListener(), this);
         getServer().getPluginManager().registerEvents(new NaturalListener(), this);
 
-        // Register the commands.
-        BukkitCommandManager<CommandSender> command = BukkitCommandManager.create(this);
+        // Register commands.
+        getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> {
+            LiteralArgumentBuilder<CommandSourceStack> root = new BaseCommand().registerPermission().literal().createBuilder();
 
-        command.registerCommand(new BaseCommand());
+            List.of(
+                    new CommandReload(),
+                    new CommandHelp()
+            ).forEach(command -> root.then(command.registerPermission().literal()));
+
+            event.registrar().register(root.build(), "the base command for RedstonePvP");
+        });
     }
 
     @Override
