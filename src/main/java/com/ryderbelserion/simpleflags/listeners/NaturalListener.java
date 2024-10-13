@@ -18,7 +18,11 @@ public class NaturalListener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onSpawnEvent(PreCreatureSpawnEvent event) {
-        FlagBuilder flag = this.flagManager.getFlag(CustomFlags.NATURAL_FLAG.getName());
+        final String flagName = CustomFlags.NATURAL_FLAG.getName();
+
+        if (!this.flagManager.hasFlag(flagName)) return;
+
+        final FlagBuilder flag = this.flagManager.getFlag(flagName);
 
         if (!flag.preventSpawning(event.getSpawnLocation(), event.getReason(), CreatureSpawnEvent.SpawnReason.NATURAL)) {
             event.setCancelled(true);

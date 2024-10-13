@@ -41,9 +41,7 @@ public class SimpleFlags extends Vital {
     @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new NaturalListener(), this);
-        // Register the listener.
         getServer().getPluginManager().registerEvents(new DrowningListener(), this);
-        getServer().getPluginManager().registerEvents(new NaturalListener(), this);
 
         // Register commands.
         getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> {

@@ -20,11 +20,15 @@ public class DrowningListener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onPlayerDrowning(EntityDamageEvent event) {
-        Entity entity = event.getEntity();
+        final Entity entity = event.getEntity();
 
         if (!(entity instanceof Player player)) return;
 
-        FlagBuilder flag = this.flagManager.getFlag(CustomFlags.DROWN_FLAG.getName());
+        final String flagName = CustomFlags.DROWN_FLAG.getName();
+
+        if (!this.flagManager.hasFlag(flagName)) return;
+
+        final FlagBuilder flag = this.flagManager.getFlag(flagName);
 
         if (!flag.preventDamage(player, event.getDamageSource(), DamageType.DROWN)) {
             event.setCancelled(true);
