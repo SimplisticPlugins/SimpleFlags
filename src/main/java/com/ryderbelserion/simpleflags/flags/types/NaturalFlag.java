@@ -15,6 +15,8 @@ public class NaturalFlag extends FlagBuilder {
 
     @Override
     public void register() {
+        if (!ConfigManager.getConfig().getProperty(Config.natural_spawning_flag)) return;
+
         try {
             getRegistry().register(this.flag = new StateFlag("prevent-natural-spawning", true));
         } catch (FlagConflictException exception) {

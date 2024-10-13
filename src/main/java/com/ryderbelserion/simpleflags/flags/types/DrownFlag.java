@@ -15,6 +15,8 @@ public class DrownFlag extends FlagBuilder {
 
     @Override
     public void register() {
+        if (!ConfigManager.getConfig().getProperty(Config.drowning_flag)) return;
+
         try {
             getRegistry().register(this.flag = new StateFlag("prevent-drowning", true));
         } catch (FlagConflictException exception) {
@@ -31,12 +33,12 @@ public class DrownFlag extends FlagBuilder {
     }
 
     @Override
-    public String getName() {
+    public final String getName() {
         return CustomFlags.DROWN_FLAG.getName();
     }
 
     @Override
-    public StateFlag getFlag() {
+    public final StateFlag getFlag() {
         return this.flag;
     }
 }
