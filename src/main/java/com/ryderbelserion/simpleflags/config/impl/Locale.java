@@ -1,4 +1,4 @@
-package com.ryderbelserion.simpleflags.platform.impl;
+package com.ryderbelserion.simpleflags.config.impl;
 
 import ch.jalu.configme.SettingsHolder;
 import ch.jalu.configme.properties.Property;

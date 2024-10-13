@@ -22,8 +22,6 @@ import java.util.List;
 
 public class SimpleFlags extends JavaPlugin {
 
-    private SettingsManager config;
-    private SettingsManager locale;
 
     private WorldGuard worldGuard;
 
@@ -31,6 +29,8 @@ public class SimpleFlags extends JavaPlugin {
 
     @Override
     public void onLoad() {
+        ConfigManager.load(getDataFolder());
+
         this.worldGuard = WorldGuard.getInstance();
 
         this.flagManager = new FlagManager();
@@ -43,21 +43,7 @@ public class SimpleFlags extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Create config files
-        YamlFileResourceOptions builder = YamlFileResourceOptions.builder().indentationSize(2).build();
-
-        this.config = SettingsManagerBuilder
-                .withYamlFile(new File(getDataFolder(), "config.yml"), builder)
-                .useDefaultMigrationService()
-                .configurationData(Config.class)
-                .create();
-
-        this.locale = SettingsManagerBuilder
-                .withYamlFile(new File(getDataFolder(), "messages.yml"), builder)
-                .useDefaultMigrationService()
-                .configurationData(Locale.class)
-                .create();
-
+        getServer().getPluginManager().registerEvents(new NaturalListener(), this);
         // Register the listener.
         getServer().getPluginManager().registerEvents(new DrowningListener(), this);
         getServer().getPluginManager().registerEvents(new NaturalListener(), this);
@@ -78,14 +64,6 @@ public class SimpleFlags extends JavaPlugin {
     @Override
     public void onDisable() {
         super.onDisable();
-    }
-
-    public @NotNull SettingsManager getOptions() {
-        return this.config;
-    }
-
-    public @NotNull SettingsManager getLocale() {
-        return this.locale;
     }
 
     public @NotNull WorldGuard getWorldGuard() {
