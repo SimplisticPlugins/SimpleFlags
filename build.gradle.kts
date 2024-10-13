@@ -7,7 +7,7 @@ plugins {
 }
 
 rootProject.group = "com.ryderbelserion.simpleflags"
-rootProject.version = if (System.getenv("BUILD_NUMBER") != null) "1.0-${System.getenv("BUILD_NUMBER")}" else "1.0"
+rootProject.version = "1.0"
 rootProject.description = "A plugin that adds simple worldguard flags."
 
 repositories {
