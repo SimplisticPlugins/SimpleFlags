@@ -1,46 +1,39 @@
 plugins {
+    alias(libs.plugins.runPaper)
+    alias(libs.plugins.minotaur)
     alias(libs.plugins.shadow)
-    alias(libs.plugins.userdev)
-    alias(libs.plugins.run.paper)
-    alias(libs.plugins.modrinth)
 
     `java-library`
 }
 
-base {
-    archivesName.set(rootProject.name)
-}
-
-val mcVersion = providers.gradleProperty("mcVersion").get()
-
-project.version = if (System.getenv("BUILD_NUMBER") != null) "${rootProject.version}-${System.getenv("BUILD_NUMBER")}" else rootProject.version
+rootProject.group = "com.ryderbelserion.simpleflags"
+rootProject.version = if (System.getenv("BUILD_NUMBER") != null) "1.0-${System.getenv("BUILD_NUMBER")}" else "1.0"
+rootProject.description = "A plugin that adds simple worldguard flags."
 
 repositories {
-    maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://repo.papermc.io/repository/maven-public")
 
-    maven("https://repo.triumphteam.dev/snapshots/")
+    maven("https://repo.crazycrew.us/libraries")
 
-    maven("https://maven.enginehub.org/repo/")
+    maven("https://maven.enginehub.org/repo")
 }
 
 dependencies {
-    paperweight.paperDevBundle(libs.versions.bundle)
-
-    compileOnly(libs.triumph.cmds)
+    compileOnly(libs.vital.paper)
 
     compileOnly(libs.worldguard)
 
-    compileOnly(libs.configme)
+    compileOnly(libs.paper)
 }
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of("17"))
+    toolchain.languageVersion.set(JavaLanguageVersion.of("21"))
 }
 
 tasks {
     compileJava {
         options.encoding = Charsets.UTF_8.name()
-        options.release.set(17)
+        options.release.set(21)
     }
 
     javadoc {
@@ -51,22 +44,13 @@ tasks {
         filteringCharset = Charsets.UTF_8.name()
     }
 
-    val jarsDir = File("$rootDir/jars")
-
     assemble {
-        doFirst {
-            delete(jarsDir)
-
-            jarsDir.mkdirs()
-        }
-
-        // Makes it so reobfJar runs next.
-        dependsOn(reobfJar)
+        dependsOn(shadowJar)
 
         doLast {
             copy {
-                from(project.layout.buildDirectory.file("libs/${rootProject.name}-${project.version}.jar"))
-                into(jarsDir)
+                from(shadowJar.get())
+                into(rootProject.projectDir.resolve("jars"))
             }
         }
     }
@@ -76,32 +60,31 @@ tasks {
 
         defaultCharacterEncoding = Charsets.UTF_8.name()
 
-        minecraftVersion(mcVersion)
+        minecraftVersion(libs.versions.minecraft.get())
     }
 
-    val isBeta: Boolean = providers.gradleProperty("isBeta").get().toBoolean()
-    val type = if (isBeta) "Beta" else "Release"
-
     modrinth {
-        versionType.set(type.lowercase())
+        token.set(System.getenv("MODRINTH_TOKEN"))
 
-        autoAddDependsOn.set(false)
+        projectId.set(rootProject.name)
 
-        token.set(System.getenv("modrinth_token"))
+        versionType.set("release")
 
-        projectId.set(rootProject.name.lowercase())
+        versionName.set("${rootProject.name} ${rootProject.version}")
+        versionNumber.set(rootProject.version as String)
 
         changelog.set(rootProject.file("CHANGELOG.md").readText(Charsets.UTF_8))
 
-        versionName.set("${rootProject.name} ${project.version}")
+        uploadFile.set(shadowJar.get())
 
-        versionNumber.set("${project.version}")
+        gameVersions.set(listOf(libs.versions.minecraft.get()))
 
-        uploadFile.set("$jarsDir/${rootProject.name}-${project.version}.jar")
+        loaders.addAll(listOf("purpur", "paper", "folia"))
 
-        gameVersions.add(mcVersion)
+        syncBodyFrom.set(rootProject.file("README.md").readText(Charsets.UTF_8))
 
-        loaders.addAll("paper", "purpur")
+        autoAddDependsOn.set(false)
+        detectLoaders.set(false)
     }
 
     processResources {
@@ -110,7 +93,7 @@ tasks {
             "version" to rootProject.version,
             "group" to rootProject.group,
             "description" to rootProject.description,
-            "apiVersion" to providers.gradleProperty("apiVersion").get()
+            "apiVersion" to libs.versions.minecraft.get()
         )
 
         filesMatching("paper-plugin.yml") {
