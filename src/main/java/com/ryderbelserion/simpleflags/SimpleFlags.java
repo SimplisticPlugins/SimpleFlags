@@ -1,27 +1,24 @@
 package com.ryderbelserion.simpleflags;
 
-import ch.jalu.configme.SettingsManager;
-import ch.jalu.configme.SettingsManagerBuilder;
-import ch.jalu.configme.resource.YamlFileResourceOptions;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.ryderbelserion.simpleflags.commands.BaseCommand;
+import com.ryderbelserion.simpleflags.commands.types.CommandHelp;
+import com.ryderbelserion.simpleflags.commands.types.CommandReload;
+import com.ryderbelserion.simpleflags.config.ConfigManager;
 import com.ryderbelserion.simpleflags.flags.FlagManager;
 import com.ryderbelserion.simpleflags.flags.types.DrownFlag;
 import com.ryderbelserion.simpleflags.flags.types.NaturalFlag;
 import com.ryderbelserion.simpleflags.listeners.DrowningListener;
 import com.ryderbelserion.simpleflags.listeners.NaturalListener;
-import com.ryderbelserion.simpleflags.platform.BaseCommand;
-import com.ryderbelserion.simpleflags.platform.impl.Config;
-import com.ryderbelserion.simpleflags.platform.impl.Locale;
+import com.ryderbelserion.vital.paper.Vital;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
-import dev.triumphteam.cmd.bukkit.BukkitCommandManager;
-import org.bukkit.command.CommandSender;
-import org.bukkit.plugin.java.JavaPlugin;
+import io.papermc.paper.command.brigadier.CommandSourceStack;
+import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.jetbrains.annotations.NotNull;
-import java.io.File;
 import java.util.List;
 
-public class SimpleFlags extends JavaPlugin {
-
+public class SimpleFlags extends Vital {
 
     private WorldGuard worldGuard;
 

@@ -1,5 +1,7 @@
 package com.ryderbelserion.simpleflags.flags.types;
 
+import com.ryderbelserion.simpleflags.config.ConfigManager;
+import com.ryderbelserion.simpleflags.config.impl.Config;
 import com.ryderbelserion.simpleflags.flags.FlagBuilder;
 import com.ryderbelserion.simpleflags.flags.enums.CustomFlags;
 import com.sk89q.worldguard.protection.flags.Flag;
