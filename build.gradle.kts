@@ -55,6 +55,10 @@ tasks {
         }
     }
 
+    shadowJar {
+        archiveClassifier.set("")
+    }
+
     runServer {
         jvmArgs("-Dnet.kyori.ansi.colorLevel=truecolor")
 
