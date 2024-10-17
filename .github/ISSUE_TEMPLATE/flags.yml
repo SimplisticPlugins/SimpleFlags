@@ -1,6 +1,6 @@
 name: "🚩 Suggest a new flag to add"
 description: "Missing a worldguard flag you don't have?"
-labels: [ "type: feature" ]
+labels: [ "feature" ]
 
 body:
   - type: textarea
