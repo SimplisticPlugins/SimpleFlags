@@ -1,0 +1,20 @@
+name: "🚩 Suggest a new flag to add"
+description: "Missing a worldguard flag you don't have?"
+labels: [ "type: feature" ]
+
+body:
+  - type: textarea
+    id: feature
+    attributes:
+      label: Pick a name for it
+      description: "What do you want to name the worldguard flag?"
+      placeholder: "anti stabby max pro"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: What does the worldguard flag do?
+      description: Describe what the worldguard flag does
+    validations:
+      required: true
