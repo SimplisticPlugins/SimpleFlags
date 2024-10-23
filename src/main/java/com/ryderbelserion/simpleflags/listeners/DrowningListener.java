@@ -1,6 +1,8 @@
 package com.ryderbelserion.simpleflags.listeners;
 
 import com.ryderbelserion.simpleflags.SimpleFlags;
+import com.ryderbelserion.simpleflags.config.ConfigManager;
+import com.ryderbelserion.simpleflags.config.impl.Config;
 import com.ryderbelserion.simpleflags.flags.builders.StateFlagBuilder;
 import com.ryderbelserion.simpleflags.flags.FlagManager;
 import com.ryderbelserion.simpleflags.flags.enums.CustomFlags;
@@ -29,6 +31,8 @@ public class DrowningListener implements Listener {
         if (!this.flagManager.hasFlag(flagName)) return;
 
         final StateFlagBuilder flag = (StateFlagBuilder) this.flagManager.getFlag(flagName);
+
+        if (!flag.isEnabled()) return;
 
         if (!flag.preventDamage(player, event.getDamageSource(), DamageType.DROWN)) {
             event.setCancelled(true);

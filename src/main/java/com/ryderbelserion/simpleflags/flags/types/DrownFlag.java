@@ -1,6 +1,5 @@
 package com.ryderbelserion.simpleflags.flags.types;
 
-import com.ryderbelserion.simpleflags.config.ConfigManager;
 import com.ryderbelserion.simpleflags.config.impl.Config;
 import com.ryderbelserion.simpleflags.flags.builders.StateFlagBuilder;
 import com.ryderbelserion.simpleflags.flags.enums.CustomFlags;
@@ -15,7 +14,7 @@ public class DrownFlag extends StateFlagBuilder {
 
     @Override
     public void register() {
-        if (!ConfigManager.getConfig().getProperty(Config.drowning_flag)) return;
+        if (!isEnabled()) return;
 
         try {
             getRegistry().register(this.flag = new StateFlag("prevent-drowning", true));
@@ -40,5 +39,10 @@ public class DrownFlag extends StateFlagBuilder {
     @Override
     public StateFlag getFlag() {
         return this.flag;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.config.getProperty(Config.drowning_flag);
     }
 }
