@@ -20,10 +20,11 @@ public abstract class StateFlagBuilder extends FlagBuilder<StateFlag> {
      * @param player the player to prevent damage to.
      * @param source the source of the damage.
      * @param type the type of the damage to check.
+     * @param flag the flag.
      * @return true or false
      */
-    public boolean preventDamage(Player player, DamageSource source, DamageType type) {
-        return source.getDamageType() == type && getQuery().testState(BukkitAdapter.adapt(player.getLocation()), WorldGuardPlugin.inst().wrapPlayer(player), getFlag());
+    public boolean preventDamage(Player player, DamageSource source, DamageType type, StateFlag flag) {
+        return source.getDamageType() == type && getQuery().testState(BukkitAdapter.adapt(player.getLocation()), WorldGuardPlugin.inst().wrapPlayer(player), flag);
     }
 
     /**
@@ -32,9 +33,10 @@ public abstract class StateFlagBuilder extends FlagBuilder<StateFlag> {
      * @param location the location to check.
      * @param receivingReason the reason from the event.
      * @param reason your reason.
+     * @param flag the flag.
      * @return true or false
      */
-    public boolean preventSpawning(org.bukkit.Location location, CreatureSpawnEvent.SpawnReason receivingReason, CreatureSpawnEvent.SpawnReason reason) {
-        return receivingReason != reason || getQuery().testState(BukkitAdapter.adapt(location), null, getFlag());
+    public boolean preventSpawning(org.bukkit.Location location, CreatureSpawnEvent.SpawnReason receivingReason, CreatureSpawnEvent.SpawnReason reason, StateFlag flag) {
+        return receivingReason != reason || getQuery().testState(BukkitAdapter.adapt(location), null, flag);
     }
 }
