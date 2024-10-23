@@ -7,7 +7,7 @@ plugins {
 }
 
 rootProject.group = "com.ryderbelserion.simpleflags"
-rootProject.version = "1.0"
+rootProject.version = "1.0.1"
 rootProject.description = "A plugin that adds simple worldguard flags."
 
 repositories {
