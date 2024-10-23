@@ -25,7 +25,7 @@ public abstract class FlagBuilder<T extends Flag> {
     /**
      * @return A query of regions.
      */
-    protected RegionQuery getQuery() {
+    public RegionQuery getQuery() {
         return this.plugin.getRegions().createQuery();
     }
 
@@ -35,5 +35,4 @@ public abstract class FlagBuilder<T extends Flag> {
     protected FlagRegistry getRegistry() {
         return this.plugin.getWorldGuard().getFlagRegistry();
     }
-
 }

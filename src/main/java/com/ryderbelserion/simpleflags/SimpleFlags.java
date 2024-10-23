@@ -6,6 +6,7 @@ import com.ryderbelserion.simpleflags.commands.types.CommandHelp;
 import com.ryderbelserion.simpleflags.commands.types.CommandReload;
 import com.ryderbelserion.simpleflags.config.ConfigManager;
 import com.ryderbelserion.simpleflags.flags.FlagManager;
+import com.ryderbelserion.simpleflags.flags.types.CapacityFlag;
 import com.ryderbelserion.simpleflags.flags.types.DrownFlag;
 import com.ryderbelserion.simpleflags.flags.types.NaturalFlag;
 import com.ryderbelserion.simpleflags.listeners.DrowningListener;
@@ -34,7 +35,9 @@ public class SimpleFlags extends Vital {
 
         List.of(
                 new DrownFlag(),
-                new NaturalFlag()
+                new NaturalFlag(),
+
+                new CapacityFlag()
         ).forEach(this.flagManager::addFlag);
     }
 

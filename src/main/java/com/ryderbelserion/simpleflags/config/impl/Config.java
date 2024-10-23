@@ -13,6 +13,9 @@ public class Config implements SettingsHolder {
     @Comment("The flag prevent_drowning as you guessed it, it prevents drowning if enabled.")
     public static final Property<Boolean> drowning_flag = newProperty("flags.drowning-flag", false);
 
+    @Comment("The flag max_players only allows a set amount of players in a region.")
+    public static final Property<Boolean> max_players_flag = newProperty("flags.max-players-flag", false);
+
     @Comment("The flag prevent_natural_spawning prevents natural mob spawns in regions.")
     public static final Property<Boolean> natural_spawning_flag = newProperty("flags.natural-spawning-flag", false);
 
