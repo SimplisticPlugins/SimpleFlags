@@ -8,7 +8,7 @@ import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public abstract class FlagBuilder<T extends Flag> {
+public abstract class FlagBuilder<F extends Flag> {
 
     protected SimpleFlags plugin = JavaPlugin.getPlugin(SimpleFlags.class);
 
@@ -18,7 +18,7 @@ public abstract class FlagBuilder<T extends Flag> {
 
     public abstract String getName();
 
-    public abstract T getFlag();
+    public abstract F getFlag();
 
     public abstract boolean isEnabled();
 
