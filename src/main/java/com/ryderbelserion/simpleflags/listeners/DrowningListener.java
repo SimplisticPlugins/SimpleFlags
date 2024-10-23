@@ -1,7 +1,7 @@
 package com.ryderbelserion.simpleflags.listeners;
 
 import com.ryderbelserion.simpleflags.SimpleFlags;
-import com.ryderbelserion.simpleflags.flags.FlagBuilder;
+import com.ryderbelserion.simpleflags.flags.builders.StateFlagBuilder;
 import com.ryderbelserion.simpleflags.flags.FlagManager;
 import com.ryderbelserion.simpleflags.flags.enums.CustomFlags;
 import org.bukkit.damage.DamageType;
@@ -28,7 +28,7 @@ public class DrowningListener implements Listener {
 
         if (!this.flagManager.hasFlag(flagName)) return;
 
-        final FlagBuilder flag = this.flagManager.getFlag(flagName);
+        final StateFlagBuilder flag = (StateFlagBuilder) this.flagManager.getFlag(flagName);
 
         if (!flag.preventDamage(player, event.getDamageSource(), DamageType.DROWN)) {
             event.setCancelled(true);

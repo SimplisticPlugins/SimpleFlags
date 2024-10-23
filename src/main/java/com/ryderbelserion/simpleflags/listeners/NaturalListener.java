@@ -2,7 +2,7 @@ package com.ryderbelserion.simpleflags.listeners;
 
 import com.destroystokyo.paper.event.entity.PreCreatureSpawnEvent;
 import com.ryderbelserion.simpleflags.SimpleFlags;
-import com.ryderbelserion.simpleflags.flags.FlagBuilder;
+import com.ryderbelserion.simpleflags.flags.builders.StateFlagBuilder;
 import com.ryderbelserion.simpleflags.flags.FlagManager;
 import com.ryderbelserion.simpleflags.flags.enums.CustomFlags;
 import org.bukkit.event.EventHandler;
@@ -22,7 +22,7 @@ public class NaturalListener implements Listener {
 
         if (!this.flagManager.hasFlag(flagName)) return;
 
-        final FlagBuilder flag = this.flagManager.getFlag(flagName);
+        final StateFlagBuilder flag = (StateFlagBuilder) this.flagManager.getFlag(flagName);
 
         if (!flag.preventSpawning(event.getSpawnLocation(), event.getReason(), CreatureSpawnEvent.SpawnReason.NATURAL)) {
             event.setCancelled(true);

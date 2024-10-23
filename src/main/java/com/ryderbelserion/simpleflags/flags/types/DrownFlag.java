@@ -2,14 +2,14 @@ package com.ryderbelserion.simpleflags.flags.types;
 
 import com.ryderbelserion.simpleflags.config.ConfigManager;
 import com.ryderbelserion.simpleflags.config.impl.Config;
-import com.ryderbelserion.simpleflags.flags.FlagBuilder;
+import com.ryderbelserion.simpleflags.flags.builders.StateFlagBuilder;
 import com.ryderbelserion.simpleflags.flags.enums.CustomFlags;
 import com.sk89q.worldguard.protection.flags.Flag;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.flags.registry.FlagConflictException;
 import java.util.logging.Level;
 
-public class DrownFlag extends FlagBuilder {
+public class DrownFlag extends StateFlagBuilder {
 
     private StateFlag flag;
 
@@ -33,12 +33,12 @@ public class DrownFlag extends FlagBuilder {
     }
 
     @Override
-    public final String getName() {
+    public String getName() {
         return CustomFlags.DROWN_FLAG.getName();
     }
 
     @Override
-    public final StateFlag getFlag() {
+    public StateFlag getFlag() {
         return this.flag;
     }
 }

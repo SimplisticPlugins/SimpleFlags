@@ -2,8 +2,9 @@ package com.ryderbelserion.simpleflags.flags.enums;
 
 public enum CustomFlags {
 
+    NATURAL_FLAG("prevent_natural_spawning"),
     DROWN_FLAG("prevent_drowning"),
-    NATURAL_FLAG("prevent_natural_spawning");
+    CAPACITY_FLAG("max_players");
 
     private final String name;
 

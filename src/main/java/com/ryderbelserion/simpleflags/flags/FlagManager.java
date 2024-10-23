@@ -6,9 +6,9 @@ import java.util.Map;
 
 public class FlagManager {
 
-    private final Map<String, FlagBuilder> flags = new HashMap<>();
+    private final Map<String, FlagBuilder<?>> flags = new HashMap<>();
 
-    public void addFlag(FlagBuilder builder) {
+    public <F extends FlagBuilder<?>> void addFlag(F builder) {
         // Register the flag.
         builder.register();
 
@@ -21,7 +21,7 @@ public class FlagManager {
         return this.flags.containsKey(name);
     }
 
-    public FlagBuilder getFlag(String name) {
+    public FlagBuilder<?> getFlag(String name) {
         return this.flags.get(name);
     }
 
@@ -29,7 +29,7 @@ public class FlagManager {
         this.flags.remove(name);
     }
 
-    public Map<String, FlagBuilder> getFlags() {
+    public Map<String, FlagBuilder<?>> getFlags() {
         return Collections.unmodifiableMap(this.flags);
     }
 }
